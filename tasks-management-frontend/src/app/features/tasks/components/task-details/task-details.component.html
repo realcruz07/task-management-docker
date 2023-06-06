@@ -1,0 +1,19 @@
+<nz-drawer
+  [nzVisible]="visible"
+  [nzTitle]="'Task Details'"
+  [nzMaskClosable]="false"
+  [nzWidth]="'500px'"
+  (nzOnClose)="cancel()"
+>
+  <ng-container *nzDrawerContent>
+    <nz-descriptions nzTitle="Task Info" [nzColumn]="1" [nzSize]="'small'">
+      <nz-descriptions-item nzTitle="Title">{{ data ? data.title : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Start Date">{{ data ? (data.startDate | date:'MM/dd/yyyy HH:mm') : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="End Date">{{ data ? (data.endDate | date:'MM/dd/yyyy HH:mm') : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Priority">{{ data ? (data.priority | taskPriority) : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Assigned To">{{ data && data.user ? data.user.name : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Status">{{ data ? (data.status | taskStatus) : '' }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Description">{{ data ? data.description : '' }}</nz-descriptions-item>
+    </nz-descriptions>
+  </ng-container>
+</nz-drawer>

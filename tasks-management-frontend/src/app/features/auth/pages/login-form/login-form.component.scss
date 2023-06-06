@@ -1,0 +1,36 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  width: 300px;
+}
+
+.login-header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.login-body {
+  padding: 16px;
+}
+
+.form-item {
+  margin-bottom: 12px;
+}
+
+.form-explain {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 16px;
+}

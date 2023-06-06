@@ -1,0 +1,72 @@
+<nz-drawer
+  [nzVisible]="visible"
+  [nzTitle]="taskId ? 'Edit Task' : 'Create Task'"
+  [nzMaskClosable]="false"
+  [nzWidth]="'500px'"
+  (nzOnClose)="cancel()"
+>
+  <form [formGroup]="taskForm" *nzDrawerContent>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'title'" nzRequired>Title</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the title'">
+        <input nz-input formControlName="title" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'startDate'" nzRequired>Start Date</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the start date'">
+        <nz-date-picker nzShowTime formControlName="startDate" style="width: 100%"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'endDate'" nzRequired>End Date</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the end date'">
+        <nz-date-picker nzShowTime formControlName="endDate" style="width: 100%"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'priority'" nzRequired>Priority</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the priority!'">
+        <nz-select formControlName="priority">
+          <ng-container *ngFor="let item of taskPriorityArray">
+            <nz-option [nzValue]="item.value" [nzLabel]="item.text"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'user'">Assigned To</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the assigned to field!'">
+        <nz-select formControlName="user">
+          <ng-container *ngFor="let item of users">
+            <nz-option [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="taskId">
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'status'" nzRequired>Status</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the status!'">
+        <nz-select formControlName="status">
+          <ng-container *ngFor="let item of taskStatusArray">
+            <nz-option [nzValue]="item.value" [nzLabel]="item.text"></nz-option>
+          </ng-container>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" [nzFor]="'description'" nzRequired>Description</nz-form-label>
+      <nz-form-control [nzSm]="18" [nzXs]="24" [nzErrorTip]="'Please enter the description'">
+        <textarea nz-input formControlName="description"></textarea>
+      </nz-form-control>
+    </nz-form-item>
+    <div nz-row nzJustify="end" nzGutter="8">
+      <div nz-col [nzFlex]="24" [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8" [nzXl]="8">
+        <button nz-button nzType="default" nzBlock (click)="cancel()">Cancel</button>
+      </div>
+      <div nz-col [nzFlex]="24" [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8" [nzXl]="8">
+        <button nz-button nzType="primary" nzBlock (click)="submit()" [disabled]="taskForm.invalid">Submit</button>
+      </div>
+    </div>
+  </form>
+</nz-drawer>

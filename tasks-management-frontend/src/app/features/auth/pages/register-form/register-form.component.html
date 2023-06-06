@@ -1,0 +1,32 @@
+<div class="register-wrapper">
+  <nz-card class="register-card">
+    <div class="register-header">Register</div>
+    <div class="register-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-item">
+          <label>Email</label>
+          <input nz-input formControlName="email" />
+          <div class="form-explain" *ngIf="isFieldValid('email')">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-item">
+          <label>Name</label>
+          <input nz-input formControlName="name" />
+          <div class="form-explain" *ngIf="isFieldValid('name')">Please enter a name.</div>
+        </div>
+
+        <div class="form-item">
+          <label>Password</label>
+          <input nz-input type="password" formControlName="password" />
+          <div class="form-explain" *ngIf="isFieldValid('password')">
+            Password must be between 4 and 15 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character.
+          </div>
+        </div>
+
+        <div class="form-item">
+          <button nz-button nzType="primary" [disabled]="!registerForm.valid">Register</button>
+        </div>
+      </form>
+    </div>
+  </nz-card>
+</div>

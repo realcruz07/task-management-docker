@@ -1,0 +1,27 @@
+<div class="login-wrapper">
+  <nz-card class="login-card">
+    <div class="login-header">Login</div>
+    <div class="login-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-item">
+          <label>Email</label>
+          <input nz-input formControlName="email" />
+          <div class="form-explain" *ngIf="isFieldValid('email')">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-item">
+          <label>Password</label>
+          <input nz-input type="password" formControlName="password" />
+          <div class="form-explain" *ngIf="isFieldValid('password')">Please enter a password.</div>
+        </div>
+
+        <div class="form-item">
+          <button nz-button nzType="primary" [disabled]="!loginForm.valid">Login</button>
+        </div>
+      </form>
+      <div class="register-link">
+        Don't have an account? <a routerLink="/auth/register">Register here</a>.
+      </div>
+    </div>
+  </nz-card>
+</div>

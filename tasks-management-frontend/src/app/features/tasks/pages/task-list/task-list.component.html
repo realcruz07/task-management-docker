@@ -1,0 +1,66 @@
+<div class="button-group" nz-row nzJustify="end">
+  <button nz-button nzType="default" (click)="openForm()">
+    <span nz-icon nzType="plus"></span>
+    Add
+  </button>
+  <button nz-button nzType="default" (click)="openForm(false)" [disabled]="checkedIds.size !== 1">
+    <span nz-icon nzType="edit"></span>
+    Edit
+  </button>
+  <button nz-button nzType="default" (click)="removeTasks()" [disabled]="checkedIds.size === 0">
+    <span nz-icon nzType="delete"></span>
+    Remove
+  </button>
+  <button nz-button nzType="default" (click)="openDetails()" [disabled]="checkedIds.size !== 1">
+    <span nz-icon nzType="unordered-list"></span>
+    Details
+  </button>
+</div>
+
+<nz-table
+  nzShowSizeChanger
+  style="height: 100%"
+  [nzData]="data"
+  [nzFrontPagination]="false"
+  [nzLoading]="loading"
+  [nzTotal]="total"
+  [nzPageSize]="paginatedData.limit"
+  [nzPageIndex]="paginatedData.page"
+  (nzQueryParams)="onQueryParamsChange($event)"
+>
+  <thead>
+  <tr>
+    <th></th>
+    <th nzColumnKey="title">Title</th>
+    <th nzColumnKey="priority">Priority</th>
+    <th nzColumnKey="startDate">Start Date</th>
+    <th nzColumnKey="endDate">End Date</th>
+    <th nzColumnKey="user">Assigned To</th>
+    <th nzColumnKey="status" [nzFilterMultiple]="false" [nzFilters]="taskStatusArray" [nzFilterFn]="true">status</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <td [nzChecked]="checkedIds.has(item.id)" (nzCheckedChange)="onItemChecked(item.id, $event)"></td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.priority | taskPriority }}</td>
+      <td>{{ item.startDate | date:'MM/dd/yyyy HH:mm' }}</td>
+      <td>{{ item.endDate | date:'MM/dd/yyyy HH:mm' }}</td>
+      <td>{{ item?.user?.name }}</td>
+      <td>{{ item.status | taskStatus }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<app-task-form
+  *ngIf="isFormVisible"
+  [taskId]="selectedTaskId"
+  [visible]="isFormVisible"
+  (visibleChange)="reloadDataSource($event)"
+></app-task-form>
+
+<app-task-details
+  *ngIf="isDetailsVisible"
+  [taskId]="Number(selectedTaskId)"
+  [(visible)]="isDetailsVisible"
+></app-task-details>
