@@ -17,15 +17,15 @@ Make sure you have the following prerequisites installed on your system:
    ```
    
 2. Navigate to the cloned project directory:
-3. 
+
    ```shell
    cd task-management-docker
    ```
    
-4. Run the following command to build and run the Docker containers:
+3. Run the following command to build and run the Docker containers:
 
    ```shell
    docker-compose up
    ```
    
-5. Open your web browser and access http://localhost:4200 to see the application in action.
+4. Open your web browser and access http://localhost:4200 to see the application in action.
